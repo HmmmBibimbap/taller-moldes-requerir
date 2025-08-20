@@ -41,6 +41,11 @@ export default function Actualizar() {
     descripcionTrabajo: ''
   })
 
+// Estados para fotos
+const [fotosSubidas, setFotosSubidas] = useState<File[]>([])
+const [vistaPreviaFotos, setVistaPreviaFotos] = useState<string[]>([])
+
+  
   const [formCerrar, setFormCerrar] = useState({
     realizo: '',
     descripcionTrabajo: '',
@@ -98,6 +103,23 @@ export default function Actualizar() {
     return []
   }
 
+// Funciones para manejar fotos
+const manejarCargaFoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const archivo = event.target.files?.[0]
+  if (archivo) {
+    const urlVista = URL.createObjectURL(archivo)
+    setVistaPreviaFotos([...vistaPreviaFotos, urlVista])
+    setFotosSubidas([...fotosSubidas, archivo])
+  }
+}
+
+const descartarFoto = (index: number) => {
+  const nuevasVistas = vistaPreviaFotos.filter((_, i) => i !== index)
+  const nuevasfotos = fotosSubidas.filter((_, i) => i !== index)
+  setVistaPreviaFotos(nuevasVistas)
+  setFotosSubidas(nuevasfotos)
+}
+  
   // Funciones de login
   const handleLogin = () => {
     const usuario = usuarios.find(u => 
