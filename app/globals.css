@@ -1761,3 +1761,23 @@ body {
     width: 100%;
   }
 }
+
+.photo-preview-single {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.btn-success-small {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.btn-success-small:hover {
+  background-color: #059669;
+}
