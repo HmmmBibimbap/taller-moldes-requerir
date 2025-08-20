@@ -1,0 +1,1053 @@
+/* Reset y variables globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #dc2626;
+  --secondary-color: #1f2937;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --gray-50:  #e3e6e8; /* #f9fafb */
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--gray-800);
+  background-color: var(--gray-50);
+  overflow-x: hidden; /* Evitar scroll horizontal */
+}
+
+/* Dashboard Layout SIN SCROLL GENERAL */
+.dashboard {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER CENTRADO */
+.header {
+  background: linear-gradient(135deg, var(--primary-color), #b91c1c);
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.header-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* CENTRAR TODO EL CONTENIDO */
+  gap: 1rem;
+  position: relative;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  position: absolute; /* POSICIÓN ABSOLUTA PARA NO AFECTAR CENTRADO */
+  left: 0; /* PEGADO A LA IZQUIERDA */
+}
+
+.menu-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center; /* CENTRADO DEL TEXTO */
+}
+
+/* MENÚ LATERAL */
+.sidebar-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Oculto por defecto */
+  width: 250px;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1001;
+  border-right: 2px solid var(--gray-200);
+}
+
+.sidebar-menu.active {
+  left: 0; /* Visible cuando está activo */
+}
+
+.menu-items {
+  padding-top: 5rem; /* Espacio para el header */
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: var(--gray-800);
+  transition: all 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.menu-item:hover {
+  background-color: var(--gray-100);
+  color: var(--primary-color);
+}
+
+.menu-item.active {
+  background-color: #fee2e2;
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.menu-icon {
+  font-size: 1.2rem;
+}
+
+/* LAYOUT PRINCIPAL SIN SCROLL */
+.main-layout {
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  padding: 2rem;
+  overflow: hidden; /* SIN SCROLL GENERAL */
+  max-height: calc(100vh - 80px); /* Altura exacta sin header */
+}
+
+/* SIDEBAR IZQUIERDO - MÉTRICAS VERTICALES (15%) */
+.metrics-sidebar {
+  width: 12%; /* REDUCIDO A 15% */
+  min-width: 200px; /* Mínimo más pequeño */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.metric-card-vertical {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column; /* CAMBIO: columna en lugar de fila */
+  align-items: center;    /* CENTRAR horizontalmente */
+  justify-content: center; /* CENTRAR verticalmente */
+  text-align: center;     /* CENTRAR texto */
+  gap: 0.5rem;           /* REDUCIR espacio entre elementos */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.metric-card-vertical:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card-vertical .metric-icon {
+  font-size: 1.8rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background-color: var(--gray-100);
+}
+
+.metric-card-vertical .metric-info h3 {
+  font-size: 0.85rem;
+  color: var(--gray-800);
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  text-align: center; /* CENTRAR */
+}
+
+.metric-card-vertical .metric-number {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center; /* CENTRAR */
+}
+
+/* Colores específicos para métricas verticales */
+.metric-card-vertical.pending .metric-icon {
+  background-color: #fee2e2;
+}
+.metric-card-vertical.pending .metric-number {
+  color: var(--danger-color);
+}
+
+.metric-card-vertical.in-progress .metric-icon {
+  background-color: #fef3c7;
+}
+.metric-card-vertical.in-progress .metric-number {
+  color: var(--warning-color);
+}
+
+.metric-card-vertical.completed .metric-icon {
+  background-color: #d1fae5;
+}
+.metric-card-vertical.completed .metric-number {
+  color: var(--success-color);
+}
+
+.metric-card-vertical.average .metric-icon {
+  background-color: #e0f2fe;
+}
+.metric-card-vertical.average .metric-number {
+  color: #0284c7;
+}
+
+/* ÁREA PRINCIPAL DE ÓRDENES (80%) */
+.orders-main-area {
+  flex: 1;
+  width: 83%; /* AUMENTADO A 80% */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.orders-main-area h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: Black;
+  flex-shrink: 0;
+ 
+}
+
+/* GRID DE 4 COLUMNAS AMPLIO */
+.orders-grid-wide {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Columnas de categorías */
+.category-column {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.category-column .category-header {
+  background: linear-gradient(135deg, var(--primary-color), #b91c1c);
+  color: white;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: none;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.category-column .category-header h3 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+/* Container de scroll para las órdenes */
+.orders-scroll-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.orders-vertical-list {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Scrollbar personalizado */
+.orders-vertical-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.orders-vertical-list::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: 3px;
+}
+
+.orders-vertical-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.orders-vertical-list::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* TARJETAS DE ÓRDENES */
+.order-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--gray-300);
+  transition: all 0.2s;
+  margin-bottom: 0;
+  min-width: auto;
+  flex-shrink: 0;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(4px);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.order-number {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--gray-900);
+}
+
+.priority-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-badge.high {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.priority-badge.medium {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.priority-badge.low {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.order-details p {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: var(--gray-800);
+}
+
+.order-details strong {
+  color: var(--gray-900);
+}
+
+/* Colores de borde por prioridad */
+.order-card.priority-high {
+  border-left-color: var(--danger-color);
+}
+
+.order-card.priority-medium {
+  border-left-color: var(--warning-color);
+}
+
+.order-card.priority-low {
+  border-left-color: var(--success-color);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .main-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .metrics-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  
+  .metric-card-vertical {
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+  
+  .orders-main-area {
+    width: 100%;
+  }
+  
+  .orders-grid-wide {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .orders-grid-wide {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-menu {
+    width: 100%;
+    left: -100%;
+  }
+}
+
+
+/* OVERLAY DEL MENÚ */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+
+/* ===== MODO OSCURO ===== */
+
+/* Botón de modo oscuro */
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  position: absolute;
+  right: 0;
+}
+
+.dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Variables del modo oscuro */
+.dark-mode {
+  --gray-50: #0f0f0f;
+  --gray-100: #1a1a1a;
+  --gray-200: #2a2a2a;
+  --gray-300: #3a3a3a;
+  --gray-800: #e5e5e5;
+  --gray-900: #f5f5f5;
+}
+
+/* Aplicar modo oscuro */
+.dark-mode {
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+}
+
+.dark-mode .metric-card-vertical,
+.dark-mode .category-column,
+.dark-mode .order-card,
+.dark-mode .sidebar-menu {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+.dark-mode .metric-card-vertical .metric-icon {
+  background-color: var(--gray-300);
+}
+
+.dark-mode .order-details p {
+  color: var(--gray-800);
+}
+
+.dark-mode .order-details strong {
+  color: var(--gray-900);
+}
+
+.dark-mode .menu-item {
+  color: var(--gray-800);
+}
+
+.dark-mode .menu-item:hover {
+  background-color: var(--gray-300);
+}
+
+.dark-mode .menu-item.active {
+  background-color: rgba(220, 38, 38, 0.2);
+  color: var(--primary-color);
+}
+
+/* Scrollbar en modo oscuro */
+.dark-mode .orders-vertical-list::-webkit-scrollbar-track {
+  background: var(--gray-300);
+}
+
+.dark-mode .orders-vertical-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+/* ===== MODO OSCURO ===== */
+
+/* Botón de modo oscuro */
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  position: absolute;
+  right: 0;
+}
+
+.dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Variables del modo oscuro */
+.dark-mode {
+  --gray-50: #0f0f0f;
+  --gray-100: #1a1a1a;
+  --gray-200: #2a2a2a;
+  --gray-300: #3a3a3a;
+  --gray-800: #e5e5e5;
+  --gray-900: #f5f5f5;
+}
+
+/* Aplicar modo oscuro */
+.dark-mode {
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+}
+
+.dark-mode .metric-card-vertical,
+.dark-mode .category-column,
+.dark-mode .order-card,
+.dark-mode .sidebar-menu {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+/* Restaurar colores de íconos en modo oscuro */
+.dark-mode .metric-card-vertical.pending .metric-icon {
+  background-color: #fee2e2; /* Mantener fondo rojo claro */
+}
+
+.dark-mode .metric-card-vertical.in-progress .metric-icon {
+  background-color: #fef3c7; /* Mantener fondo amarillo claro */
+}
+
+.dark-mode .metric-card-vertical.completed .metric-icon {
+  background-color: #d1fae5; /* Mantener fondo verde claro */
+}
+
+.dark-mode .metric-card-vertical.average .metric-icon {
+  background-color: #e0f2fe; /* Mantener fondo azul claro */
+}
+
+/* Restaurar números de colores en modo oscuro */
+.dark-mode .metric-card-vertical.pending .metric-number {
+  color: #ef4444; /* Rojo más brillante para modo oscuro */
+}
+
+.dark-mode .metric-card-vertical.in-progress .metric-number {
+  color: #f59e0b; /* Amarillo más brillante */
+}
+
+.dark-mode .metric-card-vertical.completed .metric-number {
+  color: #10b981; /* Verde más brillante */
+}
+
+.dark-mode .metric-card-vertical.average .metric-number {
+  color: #3b82f6; /* Azul más brillante */
+}
+
+/* Restaurar bordes de colores en tarjetas de órdenes */
+.dark-mode .order-card.priority-high {
+  border-left-color: #ef4444; /* Rojo brillante */
+}
+
+.dark-mode .order-card.priority-medium {
+  border-left-color: #f59e0b; /* Amarillo brillante */
+}
+
+.dark-mode .order-card.priority-low {
+  border-left-color: #10b981; /* Verde brillante */
+}
+
+/* Asegurar que badges mantengan sus colores */
+.dark-mode .priority-badge.high {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.dark-mode .priority-badge.medium {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.dark-mode .priority-badge.low {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+/* Arreglar títulos en modo oscuro */
+.dark-mode .orders-main-area h2 {
+  color: var(--gray-900); /* Texto claro en modo oscuro */
+}
+
+/* También arreglar otros títulos si hay */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+  color: var(--gray-900);
+}
+
+
+/* ===== FORMULARIO SOLICITAR ===== */
+
+/* Layout principal del formulario */
+.form-main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  background-color: var(--gray-50);
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+}
+
+.form-container h2 {
+  background: linear-gradient(135deg, var(--primary-color), #b91c1c);
+  color: white;
+  padding: 1.5rem 2rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Formulario */
+.solicitud-form {
+  padding: 2rem;
+}
+
+/* Grupos de campos */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group label::after {
+  content: " *";
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.form-group:has(.disabled) label::after {
+  content: "";
+}
+
+.form-group small {
+  display: block;
+  color: var(--gray-600);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Inputs y selects */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: var(--gray-900);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-input.disabled {
+  background-color: var(--gray-100);
+  color: var(--gray-600);
+  cursor: not-allowed;
+  border-color: var(--gray-200);
+}
+
+.form-select:disabled {
+  background-color: var(--gray-100);
+  color: var(--gray-500);
+  cursor: not-allowed;
+}
+
+/* Textarea */
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: var(--gray-900);
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-textarea::placeholder {
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+/* Grid para información del molde */
+.molde-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--gray-50);
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+}
+
+.molde-info-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.molde-info-grid .form-group {
+  margin-bottom: 0;
+}
+
+/* Botones */
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--gray-200);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-tertiary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.btn-secondary {
+  background-color: white;
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.btn-secondary:hover {
+  background-color: var(--gray-50);
+  border-color: var(--gray-400);
+  transform: translateY(-1px);
+}
+
+.btn-tertiary {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--gray-600);
+}
+
+.btn-tertiary:hover {
+  color: var(--gray-800);
+  background-color: var(--gray-100);
+}
+
+/* Estados de validación - MODO CLARO */
+.form-input:invalid,
+.form-select:invalid,
+.form-textarea:invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.form-input:valid,
+.form-select:valid,
+.form-textarea:valid {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Estados de validación - MODO OSCURO */
+.dark-mode .form-input:invalid,
+.dark-mode .form-select:invalid,
+.dark-mode .form-textarea:invalid {
+  border-color: #f87171 !important; /* Rojo más claro y visible */
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2) !important;
+  background-color: rgba(239, 68, 68, 0.05) !important;
+}
+
+.dark-mode .form-input:valid,
+.dark-mode .form-select:valid,
+.dark-mode .form-textarea:valid {
+  border-color: #34d399 !important; /* Verde más claro y visible */
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2) !important;
+  background-color: rgba(16, 185, 129, 0.05) !important;
+}
+
+/* Mejorar el grid de info del molde en modo oscuro */
+.dark-mode .molde-info-grid {
+  background-color: var(--gray-300);
+  border: 2px solid var(--gray-400); /* Borde más visible */
+}
+
+/* Mejorar bordes de campos en modo oscuro */
+.dark-mode .form-input:focus,
+.dark-mode .form-select:focus,
+.dark-mode .form-textarea:focus {
+  border-color: #60a5fa !important; /* Azul más visible */
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+}
+
+
+/* Mejorar contraste de labels en modo oscuro */
+.dark-mode .form-group label {
+  color: #f3f4f6 !important; /* Texto más claro */
+  font-weight: 700; /* Más bold para mejor visibilidad */
+}
+
+.dark-mode .form-group small {
+  color: #d1d5db !important; /* Texto de ayuda más claro */
+}
+/* MODO OSCURO PARA FORMULARIOS */
+.dark-mode .form-container {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+.dark-mode .form-input,
+.dark-mode .form-select,
+.dark-mode .form-textarea {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-900);
+}
+
+.dark-mode .form-input.disabled {
+  background-color: var(--gray-300);
+  color: var(--gray-600);
+}
+
+.dark-mode .form-select:disabled {
+  background-color: var(--gray-300);
+  color: var(--gray-600);
+}
+
+.dark-mode .molde-info-grid {
+  background-color: var(--gray-300);
+  border-color: var(--gray-400);
+}
+
+.dark-mode .form-group label {
+  color: var(--gray-900);
+}
+
+.dark-mode .form-group small {
+  color: var(--gray-700);
+}
+
+.dark-mode .form-textarea::placeholder {
+  color: var(--gray-600);
+}
+
+.dark-mode .btn-secondary {
+  background-color: var(--gray-200);
+  border-color: var(--gray-400);
+  color: var(--gray-800);
+}
+
+.dark-mode .btn-secondary:hover {
+  background-color: var(--gray-300);
+}
+
+.dark-mode .btn-tertiary {
+  color: var(--gray-700);
+}
+
+.dark-mode .btn-tertiary:hover {
+  color: var(--gray-900);
+  background-color: var(--gray-300);
+}
+
+/* RESPONSIVE PARA FORMULARIOS */
+@media (max-width: 768px) {
+  .form-main-content {
+    padding: 1rem;
+  }
+  
+  .form-container {
+    margin: 0;
+  }
+  
+  .solicitud-form {
+    padding: 1.5rem;
+  }
+  
+  .form-container h2 {
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+  }
+  
+  .molde-info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-tertiary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-main-content {
+    padding: 0.5rem;
+  }
+  
+  .solicitud-form {
+    padding: 1rem;
+  }
+  
+  .form-container h2 {
+    padding: 0.75rem 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+
+/* Arreglar opciones de select en modo oscuro */
+.dark-mode .form-select option {
+  background-color: var(--gray-200) !important;
+  color: var(--gray-900) !important;
+  padding: 0.5rem;
+}
+
+/* Alternativa para mejor compatibilidad */
+.dark-mode .form-select {
+  background-color: var(--gray-100) !important;
+  color: var(--gray-900) !important;
+}
+
+/* Asegurar que el texto seleccionado sea visible */
+.dark-mode .form-select:focus option:checked,
+.dark-mode .form-select option:checked {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Hover en opciones */
+.dark-mode .form-select option:hover {
+  background-color: var(--gray-300) !important;
+  color: var(--gray-900) !important;
+}
+
+/* Para navegadores que soportan color-scheme */
+.dark-mode .form-select {
+  color-scheme: light;
+}
