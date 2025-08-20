@@ -380,16 +380,41 @@ const descartarFoto = (index: number) => {
 
 
 <div className="form-group">
-  <label>Fotos del progreso (opcional)</label>
-  <input 
-    type="file" 
-    accept="image/*"
-    multiple
-    className="form-input"
-  />
-  <small>Sube fotos del trabajo realizado hasta el momento</small>
-</div>
-                  
+  <label>Fotos del progreso</label>
+  <div className="photo-upload-container">
+    <input 
+      type="file" 
+      accept="image/*"
+      capture="environment"
+      onChange={manejarCargaFoto}
+      className="form-input"
+      id="foto-progreso"
+    />
+    <label htmlFor="foto-progreso" className="btn-secondary">
+      📷 Tomar Foto / Subir Imagen
+    </label>
+  </div>
+  
+  {/* Vista previa de fotos */}
+  {vistaPreviaFotos.length > 0 && (
+    <div className="photo-preview-grid">
+      {vistaPreviaFotos.map((url, index) => (
+        <div key={index} className="photo-preview-item">
+          <img src={url} alt={`Foto ${index + 1}`} className="photo-preview" />
+          <div className="photo-actions">
+            <button 
+              type="button"
+              onClick={() => descartarFoto(index)}
+              className="btn-danger-small"
+            >
+              ✕ Descartar
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>         
                   <div className="order-actions">
                     <button 
                       onClick={() => abrirModalActualizar(orden)}
