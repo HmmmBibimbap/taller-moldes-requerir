@@ -1410,3 +1410,237 @@ body {
     justify-content: center;
   }
 }
+/* ===== PÁGINA PRIORIDADES ===== */
+
+/* Gestión de prioridades */
+.priorities-management {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Selector de categoría */
+.category-selector {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-selector label {
+  font-weight: 600;
+  color: var(--gray-900);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.category-selector .form-select {
+  max-width: 300px;
+}
+
+/* Lista de prioridades */
+.priorities-list {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  padding: 2rem;
+}
+
+.priorities-list h3 {
+  color: var(--gray-900);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Tarjetas de prioridad */
+.priority-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  border-left: 4px solid var(--gray-300);
+  transition: all 0.2s;
+}
+
+.priority-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Info de la orden */
+.priority-card .order-info {
+  flex: 1;
+}
+
+.priority-card .order-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.priority-card .order-number {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--gray-900);
+}
+
+/* Badge de prioridad actual */
+.priority-current {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.priority-current.alta {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.priority-current.media {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.priority-current.baja {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.priority-current.sin {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+/* Acciones de prioridad */
+.priority-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
+.priority-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priority-input .form-input {
+  width: 80px;
+  margin: 0;
+}
+
+.priority-input .btn-primary,
+.priority-input .btn-secondary {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Colores de borde por prioridad existente */
+.priority-card:has(.priority-current.alta) {
+  border-left-color: #ef4444;
+}
+
+.priority-card:has(.priority-current.media) {
+  border-left-color: #f59e0b;
+}
+
+.priority-card:has(.priority-current.baja) {
+  border-left-color: #10b981;
+}
+
+/* MODO OSCURO PARA PRIORIDADES */
+.dark-mode .category-selector,
+.dark-mode .priorities-list,
+.dark-mode .priority-card {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+.dark-mode .category-selector label,
+.dark-mode .priorities-list h3 {
+  color: var(--gray-900);
+}
+
+.dark-mode .priority-card .order-number {
+  color: var(--gray-900);
+}
+
+.dark-mode .priority-card .order-info p {
+  color: var(--gray-800);
+}
+
+.dark-mode .priority-card .order-info strong {
+  color: var(--gray-900);
+}
+
+/* Badges en modo oscuro */
+.dark-mode .priority-current.alta {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.dark-mode .priority-current.media {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.dark-mode .priority-current.baja {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.dark-mode .priority-current.sin {
+  background-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+/* RESPONSIVE PARA PRIORIDADES */
+@media (max-width: 768px) {
+  .category-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .category-selector .form-select {
+    max-width: 100%;
+  }
+  
+  .priority-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .priority-card .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .priority-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .priority-input {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
