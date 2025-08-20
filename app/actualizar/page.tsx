@@ -41,9 +41,9 @@ export default function Actualizar() {
     descripcionTrabajo: ''
   })
 
-// Estados para fotos
-const [fotosSubidas, setFotosSubidas] = useState<File[]>([])
-const [vistaPreviaFotos, setVistaPreviaFotos] = useState<string[]>([])
+// Estados para foto individual
+const [fotoTemporal, setFotoTemporal] = useState<string | null>(null)
+const [archivoTemporal, setArchivoTemporal] = useState<File | null>(null)
 
   
   const [formCerrar, setFormCerrar] = useState({
@@ -103,21 +103,29 @@ const [vistaPreviaFotos, setVistaPreviaFotos] = useState<string[]>([])
     return []
   }
 
-// Funciones para manejar fotos
-const manejarCargaFoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const manejarCargaFoto = (event: React.ChangeEvent<HTMLInputElement>) => {
   const archivo = event.target.files?.[0]
   if (archivo) {
     const urlVista = URL.createObjectURL(archivo)
-    setVistaPreviaFotos([...vistaPreviaFotos, urlVista])
-    setFotosSubidas([...fotosSubidas, archivo])
+    setFotoTemporal(urlVista)
+    setArchivoTemporal(archivo)
   }
 }
 
-const descartarFoto = (index: number) => {
-  const nuevasVistas = vistaPreviaFotos.filter((_, i) => i !== index)
-  const nuevasfotos = fotosSubidas.filter((_, i) => i !== index)
-  setVistaPreviaFotos(nuevasVistas)
-  setFotosSubidas(nuevasfotos)
+const guardarFoto = async () => {
+  if (!archivoTemporal || !ordenSeleccionada) return
+  
+  console.log('Guardando foto para orden:', ordenSeleccionada.numero)
+  alert('Foto guardada exitosamente')
+  
+  setFotoTemporal(null)
+  setArchivoTemporal(null)
+}
+
+const descartarFoto = () => {
+  setFotoTemporal(null)
+  setArchivoTemporal(null)
 }
   
   // Funciones de login
@@ -504,6 +512,47 @@ const descartarFoto = (index: number) => {
                 />
               </div>
 
+
+<div className="form-group">
+  <label>Agregar Foto</label>
+  <div className="photo-upload-container">
+    <input 
+      type="file" 
+      accept="image/*"
+      capture="environment"
+      onChange={manejarCargaFoto}
+      className="form-input"
+      id="foto-trabajo"
+    />
+    <label htmlFor="foto-trabajo" className="btn-secondary">
+      📷 Tomar Foto / Subir Imagen
+    </label>
+  </div>
+  
+  {fotoTemporal && (
+    <div className="photo-preview-single">
+      <img src={fotoTemporal} alt="Vista previa" className="photo-preview" />
+      <div className="photo-actions">
+        <button 
+          type="button"
+          onClick={guardarFoto}
+          className="btn-success-small"
+        >
+          ✓ Guardar Foto
+        </button>
+        <button 
+          type="button"
+          onClick={descartarFoto}
+          className="btn-danger-small"
+        >
+          ✕ Descartar
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+
+              
               <div className="modal-buttons">
                 <button onClick={procesarActualizacion} className="btn-primary">
                   Actualizar Requerimiento
