@@ -355,6 +355,18 @@ export default function Actualizar() {
                       <p><strong>Solicitante:</strong> {orden.solicitante}</p>
                     </div>
                   </div>
+
+
+<div className="form-group">
+  <label>Fotos del progreso (opcional)</label>
+  <input 
+    type="file" 
+    accept="image/*"
+    multiple
+    className="form-input"
+  />
+  <small>Sube fotos del trabajo realizado hasta el momento</small>
+</div>
                   
                   <div className="order-actions">
                     <button 
