@@ -403,25 +403,7 @@ const descartarFoto = () => {
     </label>
   </div>
   
-  {/* Vista previa de fotos */}
-  {vistaPreviaFotos.length > 0 && (
-    <div className="photo-preview-grid">
-      {vistaPreviaFotos.map((url, index) => (
-        <div key={index} className="photo-preview-item">
-          <img src={url} alt={`Foto ${index + 1}`} className="photo-preview" />
-          <div className="photo-actions">
-            <button 
-              type="button"
-              onClick={() => descartarFoto(index)}
-              className="btn-danger-small"
-            >
-              ✕ Descartar
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-  )}
+
 </div>         
                   <div className="order-actions">
                     <button 
