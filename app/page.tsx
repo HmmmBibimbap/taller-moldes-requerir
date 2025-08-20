@@ -15,7 +15,7 @@ export default function Dashboard() {
         <div className="header-content">
           <div className="header-left">
             <button className="menu-toggle" onClick={toggleMenu}>☰</button>
-            <h1>Sistema de Solicitud de Requerimientos de Trabajo</h1>
+            <h1>Sistema de Solicitud de Requerimientos de Trabajo - Taller de Moldes</h1>
             <button 
               className="dark-mode-toggle" 
               onClick={() => setDarkMode(!darkMode)}
