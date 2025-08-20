@@ -42,6 +42,10 @@ export default function Dashboard() {
             <span className="menu-icon">✏️</span>
             Actualizar
           </a>
+          <a href="/prioridades" className="menu-item" onClick={() => setMenuOpen(false)}>
+            <span className="menu-icon">⚡</span>
+            Prioridades
+          </a>
           <a href="/historial" className="menu-item" onClick={() => setMenuOpen(false)}>
             <span className="menu-icon">📋</span>
             Historial
